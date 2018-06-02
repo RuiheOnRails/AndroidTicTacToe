@@ -5,38 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/tictackBG"
-    tools:context=".Login">
+    tools:context=".SignUp">
+
+    <Button
+        android:id="@+id/signUpBtn"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@color/ticBtnBG"
+        android:fontFamily="@font/baloo"
+        android:text="Sign Up"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="102dp"
-        android:layout_marginStart="102dp"
-        android:layout_marginTop="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/baloo"
         android:lineSpacingExtra="36sp"
-        android:text="Tic Tac Toe"
+        android:text="Sign Up"
         android:textColor="@android:color/white"
         android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <EditText
-            android:id="@+id/loginEmailEditText"
+            android:id="@+id/signUpEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -47,7 +64,7 @@
             android:textColorHint="@android:color/white" />
 
         <EditText
-            android:id="@+id/loginPasswordEditText"
+            android:id="@+id/signUpPW"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -57,26 +74,26 @@
             android:inputType="textPassword"
             android:textColorHint="@android:color/white" />
 
-        <Button
-            android:id="@+id/loginBtn"
-            style="@style/Widget.AppCompat.Button"
+        <EditText
+            android:id="@+id/signUpPWConf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@color/ticBtnBG"
-            android:fontFamily="@font/baloo"
-            android:text="LOGIN"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="30sp" />
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:ems="10"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:textColorHint="@android:color/white" />
 
-        <Button
-            android:id="@+id/toSignUpBtn"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        <EditText
+            android:id="@+id/signUpDisplayName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New Player? Sign up!"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white" />
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:ems="10"
+            android:hint="Display Name"
+            android:inputType="textPassword"
+            android:textColorHint="@android:color/white" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
