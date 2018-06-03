@@ -1,16 +1,20 @@
 package edu.washington.ruiheli.tictactoe
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import org.w3c.dom.Text
+import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.FirebaseDatabase
 
 
 class SignUp : AppCompatActivity() {
     private val auth = FirebaseAuth.getInstance()
+    private val db = FirebaseDatabase.getInstance().reference
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +38,18 @@ class SignUp : AppCompatActivity() {
             } else {
                 auth.createUserWithEmailAndPassword(signUpEmail.text.toString(), password.text.toString()).addOnCompleteListener { task ->
                     if (task.isSuccessful){
-                        Toast.makeText(this, "Signed up!!!!!!!!!!!", Toast.LENGTH_SHORT).show()
+                        val user = auth.currentUser
+                        val profileUpdates = UserProfileChangeRequest.Builder()
+                                .setDisplayName(displayName.text.toString()).build()
+                        user!!.updateProfile(profileUpdates)
+
+                        db.child("users").child(user.uid).child("gamesPlayed").setValue(0)
+                        db.child("users").child(user.uid).child("gamesWon").setValue(0)
+                        db.child("users").child(user.uid).child("gamesLost").setValue(0)
+
+                        val intent = Intent(this, MainMenu::class.java)
+                        startActivity(intent)
+
                     } else {
                         Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
                     }
