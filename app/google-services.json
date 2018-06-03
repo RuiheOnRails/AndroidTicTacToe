@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1029712533996",
+    "firebase_url": "https://tictactoe-434f1.firebaseio.com",
+    "project_id": "tictactoe-434f1",
+    "storage_bucket": "tictactoe-434f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029712533996:android:737a77067a206685",
+        "android_client_info": {
+          "package_name": "edu.washington.ruiheli.tictactoe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029712533996-0tcjvt6nfcbhjehqceuductionf2d9gr.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1029712533996-0tcjvt6nfcbhjehqceuductionf2d9gr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMrAdcktKyeqWOt0CMAaGlt-51rYHVkkk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
