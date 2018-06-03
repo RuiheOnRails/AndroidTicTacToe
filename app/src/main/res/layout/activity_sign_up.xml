@@ -93,7 +93,7 @@
             android:layout_marginStart="10dp"
             android:ems="10"
             android:hint="Display Name"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:textColorHint="@android:color/white" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
