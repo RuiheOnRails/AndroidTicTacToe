@@ -15,34 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/baloo"
-                android:text="You Are: "
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/playerTagTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/baloo"
-                android:text="X / O"
-                android:textAlignment="textStart"
-                android:textColor="@android:color/white"
-                android:textSize="30sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
