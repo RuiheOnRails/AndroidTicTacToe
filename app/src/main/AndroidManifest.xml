@@ -21,7 +21,15 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".SignUp"></activity>
+        <activity android:name=".SignUp" />
+        <activity android:name=".MainMenu" />
+        <activity android:name=".OnlineSetting" />
+        <activity android:name=".OfflineSetting" />
+        <activity android:name=".OnlineGameBoard" />
+        <activity android:name=".OfflineGameBoard" />
+        <activity android:name=".Rooms" />
+        <activity android:name=".HostWaiting" />
+        <activity android:name=".Stats"></activity>
     </application>
 
 </manifest>
