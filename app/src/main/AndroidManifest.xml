@@ -30,6 +30,8 @@
         <activity android:name=".Rooms" />
         <activity android:name=".HostWaiting" />
         <activity android:name=".Stats" />
+        <activity android:name=".OfflineGameBoard4x4" />
+        <activity android:name=".OnlineGameBoard4x4"></activity>
     </application>
 
 </manifest>

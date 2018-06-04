@@ -4,6 +4,177 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tictackBG"
     tools:context=".OfflineGameBoard">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo"
+                android:text="Current:"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/currentTurnTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/baloo"
+                android:text="X / O"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/offLine3x3Tile1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="2dp"
+                    android:background="@color/ticBtnBG"
+                    android:fontFamily="@font/baloo"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="36sp" />
+
+                <Button
+                    android:id="@+id/offLine3x3Tile2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="2dp"
+                    android:background="@color/ticBtnBG"
+                    android:fontFamily="@font/baloo"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="36sp" />
+
+                <Button
+                    android:id="@+id/offLine3x3Tile3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="2dp"
+                    android:background="@color/ticBtnBG"
+                    android:fontFamily="@font/baloo"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="36sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/offLine3x3Tile4"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="2dp"
+                    android:background="@color/ticBtnBG"
+                    android:fontFamily="@font/baloo"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="36sp" />
+
+                <Button
+                    android:id="@+id/offLine3x3Tile5"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="2dp"
+                    android:background="@color/ticBtnBG"
+                    android:fontFamily="@font/baloo"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="36sp" />
+
+                <Button
+                    android:id="@+id/offLine3x3Tile6"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="2dp"
+                    android:background="@color/ticBtnBG"
+                    android:fontFamily="@font/baloo"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="36sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/offLine3x3Tile7"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="2dp"
+                    android:background="@color/ticBtnBG"
+                    android:fontFamily="@font/baloo"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="36sp" />
+
+                <Button
+                    android:id="@+id/offLine3x3Tile8"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="2dp"
+                    android:background="@color/ticBtnBG"
+                    android:fontFamily="@font/baloo"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="36sp" />
+
+                <Button
+                    android:id="@+id/offLine3x3Tile9"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="2dp"
+                    android:background="@color/ticBtnBG"
+                    android:fontFamily="@font/baloo"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="36sp" />
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
