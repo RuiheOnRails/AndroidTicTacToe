@@ -49,6 +49,7 @@ class SignUp : AppCompatActivity() {
                         db.child("users").child(user.uid).child("gamesPlayed").setValue(0)
                         db.child("users").child(user.uid).child("gamesWon").setValue(0)
                         db.child("users").child(user.uid).child("gamesLost").setValue(0)
+                        db.child("users").child(user.uid).child("gamesTied").setValue(0)
 
                         val intent = Intent(this, MainMenu::class.java)
                         startActivity(intent)
