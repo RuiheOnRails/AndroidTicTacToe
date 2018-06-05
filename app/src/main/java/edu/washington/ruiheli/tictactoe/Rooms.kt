@@ -3,7 +3,6 @@ package edu.washington.ruiheli.tictactoe
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -11,8 +10,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import org.w3c.dom.Text
-import java.util.*
+
 
 class Rooms : AppCompatActivity() {
 
@@ -35,8 +33,13 @@ class Rooms : AppCompatActivity() {
                     val arrOfNames = arrayOfNulls<String>(p0.childrenCount.toInt())
                     var idx = 0
                     p0.children.forEach {
+                        val tempOpen =  it.child("open").getValue(Boolean::class.java)
+
+                        val tempSize = it.child("boardSize").getValue(Int::class.java)
+
+
                         if (it.key!=null) {
-                            arrOfNames[idx] = it.key.toString()
+                            arrOfNames[idx] = it.key.toString() + " | " + tempSize + "x" + tempSize + " | " + if(tempOpen!=null && tempOpen) "open" else "closed"
                         }
                         idx++
                     }
