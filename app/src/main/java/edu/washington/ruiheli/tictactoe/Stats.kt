@@ -2,7 +2,6 @@ package edu.washington.ruiheli.tictactoe
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.NonNull
 import android.util.Log
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
