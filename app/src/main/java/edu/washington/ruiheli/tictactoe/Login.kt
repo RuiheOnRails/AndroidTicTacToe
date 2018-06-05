@@ -26,6 +26,11 @@ class Login : AppCompatActivity() {
         val loginBtn = findViewById<Button>(R.id.loginBtn)
         val email = findViewById<TextView>(R.id.loginEmailEditText)
         val password = findViewById<TextView>(R.id.loginPasswordEditText)
+        val toLocalGame = findViewById<Button>(R.id.toOfflineLocal)
+        toLocalGame.setOnClickListener {
+            val intent = Intent(this, OfflineSetting::class.java)
+            startActivity(intent)
+        }
 
         loginBtn.setOnClickListener {
             if (email.text.isEmpty()){
