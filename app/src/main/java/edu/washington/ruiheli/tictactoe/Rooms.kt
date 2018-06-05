@@ -6,23 +6,46 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.Button
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import org.w3c.dom.Text
+import java.util.*
 
 class Rooms : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rooms)
+        val thisContext = this
 
         val rooms = findViewById<ListView>(R.id.roomsList)
 
-        val arr = arrayOf("room1", "room2", "room3")
+        val ref = FirebaseDatabase.getInstance().reference
+        val roomsRef = ref.child("rooms")
+        roomsRef.addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                Toast.makeText(thisContext, "try again, server error", Toast.LENGTH_SHORT).show()
+            }
 
-        rooms.adapter = CustomAdaptor(arr)
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.value != null) {
+                    val arrOfNames = arrayOfNulls<String>(p0.childrenCount.toInt())
+                    var idx = 0
+                    p0.children.forEach {
+                        if (it.key!=null) {
+                            arrOfNames[idx] = it.key.toString()
+                        }
+                        idx++
+                    }
+                    rooms.adapter = CustomAdaptor(arrOfNames)
+                } else {
+                    rooms.adapter = null
+                }
+            }
+        })
 
         val newRoom = findViewById<Button>(R.id.newRoom)
         newRoom.setOnClickListener{
@@ -33,7 +56,7 @@ class Rooms : AppCompatActivity() {
 
     }
 
-    private class CustomAdaptor(data: Array<String>): BaseAdapter() {
+    private class CustomAdaptor(data: Array<String?>): BaseAdapter() {
         private val data = data
 
 
