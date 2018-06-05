@@ -62,6 +62,7 @@ class Rooms : AppCompatActivity() {
 //            }
             val row = TextView(parent?.context)
             row.text = data[position]
+            row.textSize = 30f
             return row
         }
 
