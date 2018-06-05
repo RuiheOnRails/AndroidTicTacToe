@@ -6,4 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".Stats">
 
+    <TextView
+        android:id="@+id/played"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Games Played:"
+        app:layout_constraintBottom_toTopOf="@+id/won"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stat" />
+
+    <TextView
+        android:id="@+id/won"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Games Won:"
+        app:layout_constraintBottom_toTopOf="@+id/tied"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/played" />
+
+    <TextView
+        android:id="@+id/tied"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Games Tied:"
+        app:layout_constraintBottom_toTopOf="@+id/lost"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/won" />
+
+    <TextView
+        android:id="@+id/lost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Games Lost:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tied" />
+
+    <TextView
+        android:id="@+id/ratio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Win vs. Lose"
+        app:layout_constraintBottom_toTopOf="@+id/stat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/stat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="stat"
+        app:layout_constraintBottom_toTopOf="@+id/played"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratio" />
+
 </android.support.constraint.ConstraintLayout>
