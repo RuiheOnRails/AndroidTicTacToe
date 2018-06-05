@@ -44,7 +44,7 @@ private fun checkHor(board: Array<Array<Int>>): Boolean {
 private fun checkVertical(board: Array<Array<Int>>): Boolean {
     var sum = 0
     for( i in 0 until board.size){
-        for (j in 0 until board[0].size){
+        for (j in 0 until board.size){
             sum += board[j][i]
         }
         if (abs(sum) == board.size) {

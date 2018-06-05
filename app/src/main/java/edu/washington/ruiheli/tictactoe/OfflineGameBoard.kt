@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class OfflineGameBoard : AppCompatActivity() {
 
-
     var currentPlayer = 1
     var board = arrayOf(arrayOf(0,0,0),arrayOf(0,0,0),arrayOf(0,0,0))
     override fun onCreate(savedInstanceState: Bundle?) {
