@@ -14,11 +14,19 @@ class MainMenu : AppCompatActivity() {
         val actionBar = supportActionBar
 
         val localGame = findViewById<Button>(R.id.localGame)
+        val onlineGame = findViewById<Button>(R.id.onlineGame)
 
         localGame.setOnClickListener {
             val intent = Intent(this, OfflineSetting::class.java)
             startActivity(intent)
         }
+
+        onlineGame.setOnClickListener{
+            val intent = Intent(this, Rooms::class.java)
+            startActivity(intent)
+        }
+
+
 
     }
 }
