@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import org.w3c.dom.Text
@@ -22,6 +23,12 @@ class Rooms : AppCompatActivity() {
         val arr = arrayOf("room1", "room2", "room3")
 
         rooms.adapter = CustomAdaptor(arr)
+
+        val newRoom = findViewById<Button>(R.id.newRoom)
+        newRoom.setOnClickListener{
+            val intent = Intent(this, OnlineSetting::class.java)
+            startActivity(intent)
+        }
 
 
     }
