@@ -10,6 +10,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.util.*
+import java.util.concurrent.ThreadLocalRandom
 
 class OnlineSetting : AppCompatActivity() {
     private val db = FirebaseDatabase.getInstance().reference
@@ -55,7 +57,7 @@ class OnlineSetting : AppCompatActivity() {
                         if (data != null) {
                             Toast.makeText(thisContext, "name taken, try another one", Toast.LENGTH_SHORT).show()
                         } else {
-                            val room = Room(true, chosen+3)
+                            val room = Room(true, chosen+3, FirebaseAuth.getInstance().currentUser!!.uid)
                             db.child("rooms").child(roomNameText.text.toString()).setValue(room)
                             val intent = Intent(thisContext, HostWaiting::class.java)
                             startActivity(intent)
@@ -67,8 +69,10 @@ class OnlineSetting : AppCompatActivity() {
     }
 
 
-    class Room(open: Boolean, boardSize: Int) {
+    class Room(open: Boolean, boardSize: Int, player1: String) {
         public val open = open
         public val boardSize = boardSize
+        public val player1 = player1
+        public val first = if (Math.random() > 0.5) 1 else 2
     }
 }
