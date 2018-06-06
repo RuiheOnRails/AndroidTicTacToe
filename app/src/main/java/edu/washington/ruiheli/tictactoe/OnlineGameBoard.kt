@@ -24,6 +24,8 @@ class OnlineGameBoard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_online_game_board)
 
+        val thiscontext = this
+
         val playerSymbol = findViewById<TextView>(R.id.playerTagTextView)
         val currentPlayerTextView = findViewById<TextView>(R.id.currentTurnTextViewOnline)
         currentPlayerTextView.text = "X"
@@ -76,42 +78,83 @@ class OnlineGameBoard : AppCompatActivity() {
 
         val eventListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.child("player1").getValue(String::class.java)!=null && dataSnapshot.child("player1").getValue(String::class.java) == FirebaseAuth.getInstance().currentUser!!.uid) {
-                    playerSymbol.text = "X"
-                } else if (dataSnapshot.child("player1").getValue(String::class.java) != null) {
-                    playerSymbol.text = "O"
-                }
+                if (dataSnapshot.child("forfeit").getValue(String::class.java) != null) {
+                    FirebaseDatabase.getInstance().reference.child("rooms").child(intent.getStringExtra("roomName")).removeValue()
+                    val intent = Intent(thiscontext, MainMenu::class.java)
+                    Toast.makeText(thiscontext, "Game ended due to disconnection", Toast.LENGTH_SHORT).show()
+                    startActivity(intent)
+                } else {
+                    if (dataSnapshot.child("player1").getValue(String::class.java)!=null && dataSnapshot.child("player1").getValue(String::class.java) == FirebaseAuth.getInstance().currentUser!!.uid) {
+                        playerSymbol.text = "X"
+                    } else if (dataSnapshot.child("player1").getValue(String::class.java) != null) {
+                        playerSymbol.text = "O"
+                    }
 
-                currentPlayerTextView.text = if (currentPlayer == 1) {
-                    "O"
-                }else{
-                    "X"
-                }
+                    currentPlayerTextView.text = if (currentPlayer == 1) {
+                        "O"
+                    }else{
+                        "X"
+                    }
 
-                for (i in 0 until boardBtns.size){
-                    for(j in 0 until boardBtns.size) {
-                        val value = dataSnapshot.child(i.toString()).child(j.toString()).getValue(Int::class.java)
-                        if (value == -1) {
-                            boardBtns[i][j].text = "X"
-                            board[i][j] = -1
-                            boardBtns[i][j].isEnabled = false
-                        } else if (value == 1) {
-                            boardBtns[i][j].text = "O"
-                            board[i][j] = 1
-                            boardBtns[i][j].isEnabled = false
+                    var moved = false
+
+                    for (i in 0 until boardBtns.size){
+                        for(j in 0 until boardBtns.size) {
+                            val value = dataSnapshot.child(i.toString()).child(j.toString()).getValue(Int::class.java)
+                            if (value == -1) {
+                                boardBtns[i][j].text = "X"
+                                board[i][j] = -1
+                                boardBtns[i][j].isEnabled = false
+                                moved = true
+                            } else if (value == 1) {
+                                boardBtns[i][j].text = "O"
+                                board[i][j] = 1
+                                boardBtns[i][j].isEnabled = false
+                                moved = true
+                            }
                         }
                     }
+                    if (dataSnapshot.child("player1").getValue(String::class.java) != null) {
+                        moveMade()
+                    }
                 }
-                if (dataSnapshot.child("player1").getValue(String::class.java) != null) {
-                    moveMade()
-                }
-
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}
         }
 
         room.addValueEventListener(eventListener)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        FirebaseDatabase.getInstance().reference.child("rooms").child(intent.getStringExtra("roomName")).child("forfeit").setValue(FirebaseAuth.getInstance().currentUser!!.uid)
+
+        val intent = Intent(this, MainMenu::class.java)
+        startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        FirebaseDatabase.getInstance().reference.child("rooms").child(intent.getStringExtra("roomName")).child("forfeit").setValue(FirebaseAuth.getInstance().currentUser!!.uid)
+        FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val gamesTied = p0.child("gamesLost").getValue(Int::class.java)
+                if (gamesTied != null) {
+                    FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("gamesLost").setValue(gamesTied+1)
+                }
+                val gamesPlayed = p0.child("gamesPlayed").getValue(Int::class.java)
+                if (gamesPlayed != null) {
+                    FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("gamesPlayed").setValue(gamesPlayed+1)
+                }
+            }
+        })
+
+        val intent = Intent(this, MainMenu::class.java)
+        startActivity(intent)
     }
 
 

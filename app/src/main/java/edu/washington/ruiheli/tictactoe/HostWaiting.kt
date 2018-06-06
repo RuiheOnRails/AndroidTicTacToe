@@ -55,4 +55,10 @@ class HostWaiting : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        FirebaseDatabase.getInstance().reference.child("rooms").child(intent.getStringExtra("roomName")).removeValue()
+
+    }
+
 }
