@@ -59,6 +59,18 @@ class OnlineSetting : AppCompatActivity() {
                         } else {
                             val room = Room(true, chosen+3, FirebaseAuth.getInstance().currentUser!!.uid)
                             db.child("rooms").child(roomNameText.text.toString()).setValue(room)
+                            if (chosen == 0) {
+                                db.child("rooms").child(roomNameText.text.toString()).child("0").setValue(arrayListOf(0,0,0))
+                                db.child("rooms").child(roomNameText.text.toString()).child("1").setValue(arrayListOf(0,0,0))
+                                db.child("rooms").child(roomNameText.text.toString()).child("2").setValue(arrayListOf(0,0,0))
+                            }
+                            if (chosen == 1) {
+                                db.child("rooms").child(roomNameText.text.toString()).child("0").setValue(arrayListOf(0,0,0,0))
+                                db.child("rooms").child(roomNameText.text.toString()).child("1").setValue(arrayListOf(0,0,0,0))
+                                db.child("rooms").child(roomNameText.text.toString()).child("2").setValue(arrayListOf(0,0,0,0))
+                                db.child("rooms").child(roomNameText.text.toString()).child("3").setValue(arrayListOf(0,0,0,0))
+                            }
+
                             val intent = Intent(thisContext, HostWaiting::class.java)
                             intent.putExtra("roomName", roomNameText.text.toString())
                             intent.putExtra("boardSize", chosen+3)

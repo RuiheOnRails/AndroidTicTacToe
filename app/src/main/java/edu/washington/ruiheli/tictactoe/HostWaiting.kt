@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener
 
 class HostWaiting : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_host_waiting)
@@ -26,15 +27,21 @@ class HostWaiting : AppCompatActivity() {
         val rootRef = FirebaseDatabase.getInstance().reference
         var user = auth.currentUser
         host.append(user!!.displayName)
-        var room = rootRef.child("rooms").child(intent.getStringExtra("roomName"))
+        val roomName = intent.getStringExtra("roomName")
+        var room = rootRef.child("rooms").child(roomName)
+
         val eventListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.child("player2").getValue(String::class.java) != null) {
                     if (intent.getIntExtra("boardSize", 3) == 3) {
                         val intent = Intent(thiscontext, OnlineGameBoard::class.java)
+                        intent.putExtra("roomName", roomName)
+                        room.removeEventListener(this)
                         startActivity(intent)
                     } else {
                         val intent = Intent(thiscontext, OnlineGameBoard4x4::class.java)
+                        intent.putExtra("roomName", roomName)
+                        room.removeEventListener(this)
                         startActivity(intent)
                     }
 
@@ -43,7 +50,9 @@ class HostWaiting : AppCompatActivity() {
 
             override fun onCancelled(databaseError: DatabaseError) {}
         }
+
         room.addValueEventListener(eventListener)
 
     }
+
 }

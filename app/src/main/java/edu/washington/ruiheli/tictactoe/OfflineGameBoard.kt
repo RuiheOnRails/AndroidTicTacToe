@@ -35,6 +35,7 @@ class OfflineGameBoard : AppCompatActivity() {
             for (j in 0 until boardBtns.size ){
                 boardBtns[i][j].setOnClickListener {
                     Log.i("BOARD", "clicked on $i, $j")
+                    boardBtns[i][j].isEnabled = false
                     boardBtns[i][j].text = if (currentPlayer == 1) {
                         "X"
                     }else{

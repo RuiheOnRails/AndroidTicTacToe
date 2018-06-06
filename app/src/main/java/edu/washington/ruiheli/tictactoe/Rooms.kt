@@ -122,9 +122,11 @@ class Rooms : AppCompatActivity() {
 
                     if (sizes[position] == 3) {
                         val intent = Intent(parent?.context, OnlineGameBoard::class.java)
+                        intent.putExtra("roomName", keys[position])
                         parent?.context?.startActivity(intent)
                     } else{
                         val intent = Intent(parent?.context, OnlineGameBoard4x4::class.java)
+                        intent.putExtra("roomName", keys[position])
                         parent?.context?.startActivity(intent)
                     }
                 }
