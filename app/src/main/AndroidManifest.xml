@@ -23,13 +23,37 @@
 
         <activity android:name=".SignUp" />
         <activity android:name=".MainMenu" />
-        <activity android:name=".OnlineSetting" />
-        <activity android:name=".OfflineSetting" />
+        <activity
+            android:name=".OnlineSetting"
+            android:parentActivityName=".Rooms">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Rooms" />
+        </activity>
+        <activity
+            android:name=".OfflineSetting"
+            android:parentActivityName=".MainMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainMenu" />
+        </activity>
         <activity android:name=".OnlineGameBoard" />
         <activity android:name=".OfflineGameBoard" />
-        <activity android:name=".Rooms" />
+        <activity
+            android:name=".Rooms"
+            android:parentActivityName=".MainMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainMenu" />
+        </activity>
         <activity android:name=".HostWaiting" />
-        <activity android:name=".Stats" />
+        <activity
+            android:name=".Stats"
+            android:parentActivityName=".MainMenu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainMenu" />
+        </activity>
         <activity android:name=".OfflineGameBoard4x4" />
         <activity android:name=".OnlineGameBoard4x4"></activity>
     </application>

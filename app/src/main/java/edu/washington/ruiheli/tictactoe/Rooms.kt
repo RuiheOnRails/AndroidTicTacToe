@@ -3,6 +3,7 @@ package edu.washington.ruiheli.tictactoe
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -10,6 +11,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import android.R.menu
+import android.view.Menu
 
 
 class Rooms : AppCompatActivity() {
@@ -23,6 +26,10 @@ class Rooms : AppCompatActivity() {
 
         val ref = FirebaseDatabase.getInstance().reference
         val roomsRef = ref.child("rooms")
+
+        val actionBar = supportActionBar
+
+
         roomsRef.addValueEventListener(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
                 Toast.makeText(thisContext, "try again, server error", Toast.LENGTH_SHORT).show()
@@ -49,14 +56,26 @@ class Rooms : AppCompatActivity() {
                 }
             }
         })
+    }
 
-        val newRoom = findViewById<Button>(R.id.newRoom)
-        newRoom.setOnClickListener{
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.create-> {
             val intent = Intent(this, OnlineSetting::class.java)
             startActivity(intent)
+            // User chose the "Settings" item, show the app settings UI...
+            true
         }
 
-
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
     }
 
     private class CustomAdaptor(data: Array<String?>): BaseAdapter() {
