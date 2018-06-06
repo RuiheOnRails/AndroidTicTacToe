@@ -34,4 +34,10 @@ class MainMenu : AppCompatActivity() {
 
 
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MainMenu::class.java)
+        startActivity(intent)
+    }
 }
