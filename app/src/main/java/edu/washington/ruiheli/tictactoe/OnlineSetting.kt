@@ -60,6 +60,8 @@ class OnlineSetting : AppCompatActivity() {
                             val room = Room(true, chosen+3, FirebaseAuth.getInstance().currentUser!!.uid)
                             db.child("rooms").child(roomNameText.text.toString()).setValue(room)
                             val intent = Intent(thisContext, HostWaiting::class.java)
+                            intent.putExtra("roomName", roomNameText.text.toString())
+                            intent.putExtra("boardSize", chosen+3)
                             startActivity(intent)
                         }
                     }
