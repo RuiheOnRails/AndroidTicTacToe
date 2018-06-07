@@ -130,14 +130,6 @@ class OnlineGameBoard4x4 : AppCompatActivity() {
         room.addValueEventListener(eventListener)
     }
 
-    override fun onPause() {
-        super.onPause()
-        FirebaseDatabase.getInstance().reference.child("rooms").child(intent.getStringExtra("roomName")).child("forfeit").setValue(FirebaseAuth.getInstance().currentUser!!.uid)
-
-        val intent = Intent(this, MainMenu::class.java)
-        startActivity(intent)
-    }
-
     override fun onBackPressed() {
         super.onBackPressed()
         FirebaseDatabase.getInstance().reference.child("rooms").child(intent.getStringExtra("roomName")).child("forfeit").setValue(FirebaseAuth.getInstance().currentUser!!.uid)
