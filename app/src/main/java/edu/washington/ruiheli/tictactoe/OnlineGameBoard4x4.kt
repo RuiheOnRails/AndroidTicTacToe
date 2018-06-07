@@ -117,7 +117,7 @@ class OnlineGameBoard4x4 : AppCompatActivity() {
                             }
                         }
                     }
-                    if (dataSnapshot.child("player1").getValue(String::class.java) != null) {
+                    if (dataSnapshot.child("player2").getValue(String::class.java) != null) {
                         moveMade()
                     }
                 }
