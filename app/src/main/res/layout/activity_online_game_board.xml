@@ -68,6 +68,18 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/host"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Host: " />
+
+        <TextView
+            android:id="@+id/guest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guest: " />
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

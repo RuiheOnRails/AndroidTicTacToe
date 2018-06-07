@@ -119,6 +119,8 @@ class Rooms : AppCompatActivity() {
                     ref.child("rooms").child(keys[position].toString()).child("open").setValue(false)
                     ref.child("rooms").child(keys[position].toString()).child("player2").setValue(FirebaseAuth.getInstance().currentUser!!.uid)
 
+                    ref.child("rooms").child(keys[position].toString()).child("player2Name")
+                            .setValue(FirebaseAuth.getInstance().currentUser!!.displayName!!)
 
                     if (sizes[position] == 3) {
                         val intent = Intent(parent?.context, OnlineGameBoard::class.java)

@@ -25,11 +25,15 @@ class OnlineGameBoard : AppCompatActivity() {
         setContentView(R.layout.activity_online_game_board)
 
         val thiscontext = this
+        val dbref = FirebaseDatabase.getInstance().reference
+
+        val host = findViewById<TextView>(R.id.host)
+        val guest = findViewById<TextView>(R.id.guest)
+
 
         val playerSymbol = findViewById<TextView>(R.id.playerTagTextView)
         val currentPlayerTextView = findViewById<TextView>(R.id.currentTurnTextViewOnline)
         currentPlayerTextView.text = "X"
-        val dbref = FirebaseDatabase.getInstance().reference
         val room = dbref.child("rooms").child(intent.getStringExtra("roomName"))
 
         var boardBtns = arrayOf(
@@ -78,6 +82,8 @@ class OnlineGameBoard : AppCompatActivity() {
 
         val eventListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                host.append(dataSnapshot.child("player1Name").getValue(String::class.java))
+                guest.append(dataSnapshot.child("player2Name").getValue(String::class.java))
                 if (dataSnapshot.child("forfeit").getValue(String::class.java) != null) {
                     FirebaseDatabase.getInstance().reference.child("rooms").child(intent.getStringExtra("roomName")).removeValue()
                     val intent = Intent(thiscontext, MainMenu::class.java)

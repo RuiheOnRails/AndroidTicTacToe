@@ -46,8 +46,7 @@ class OnlineSetting : AppCompatActivity() {
             if (roomName.isEmpty()) {
                 Toast.makeText(this, "must provide valid room name", Toast.LENGTH_SHORT).show()
             } else {
-                val ref = FirebaseDatabase.getInstance().reference
-                val roomObj = ref.child("rooms").child(roomName)
+                val roomObj = db.child("rooms").child(roomName)
 
 
                 roomObj.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -60,7 +59,9 @@ class OnlineSetting : AppCompatActivity() {
                         if (data != null) {
                             Toast.makeText(thisContext, "name taken, try another one", Toast.LENGTH_SHORT).show()
                         } else {
-                            val room = Room(true, chosen+3, FirebaseAuth.getInstance().currentUser!!.uid)
+                            val id = FirebaseAuth.getInstance().currentUser!!.uid
+                            val room = Room(true, chosen+3, id,
+                                    FirebaseAuth.getInstance().currentUser!!.displayName!!)
                             db.child("rooms").child(roomName).setValue(room)
                             if (chosen == 0) {
                                 db.child("rooms").child(roomName).child("0").setValue(arrayListOf(0,0,0))
@@ -86,10 +87,11 @@ class OnlineSetting : AppCompatActivity() {
     }
 
 
-    class Room(open: Boolean, boardSize: Int, player1: String) {
+    class Room(open: Boolean, boardSize: Int, player1: String, player1Name: String) {
         public val open = open
         public val boardSize = boardSize
         public val player1 = player1
+        public val player1Name = player1Name
         public val first = if (Math.random() > 0.5) 1 else 2
     }
 }
