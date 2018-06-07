@@ -3,8 +3,10 @@ package edu.washington.ruiheli.tictactoe
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.getIntent
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.*
@@ -13,6 +15,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.auth.FirebaseAuth
+import org.w3c.dom.Text
+import android.text.Editable
+
+
 
 
 class Rooms : AppCompatActivity() {
@@ -22,12 +28,24 @@ class Rooms : AppCompatActivity() {
         setContentView(R.layout.activity_rooms)
         val thisContext = this
 
+        val searchRoom = findViewById<TextView>(R.id.searchRoom)
+
+
         val rooms = findViewById<ListView>(R.id.roomsList)
+
+        val searchBtn = findViewById<Button>(R.id.searchBtn)
+        searchBtn.setOnClickListener {
+            if (rooms.adapter != null) {
+                val adapter = rooms.adapter as CustomAdaptor
+                adapter.highLightOnMatch(searchRoom.text.toString())
+            }
+        }
 
         val ref = FirebaseDatabase.getInstance().reference
         val roomsRef = ref.child("rooms")
 
         val actionBar = supportActionBar
+
 
 
         roomsRef.addValueEventListener(object: ValueEventListener{
@@ -100,6 +118,17 @@ class Rooms : AppCompatActivity() {
         private val keys = keys
         private val myContext =context
         private val host = host
+        private val rows = arrayOfNulls<View>(data.size)
+
+        fun highLightOnMatch(matching:String) {
+            for (i in 0 until keys.size) {
+                if (keys[i] == matching) {
+                    rows[i]!!.setBackgroundColor(Color.parseColor("#42eef4"))
+                } else  {
+                    rows[i]!!.setBackgroundColor(0)
+                }
+            }
+        }
 
         override fun getCount(): Int {
             return data.size
@@ -157,6 +186,7 @@ class Rooms : AppCompatActivity() {
                 }
 
             }
+            rows[position] = rowLayout
             return rowLayout
         }
 
