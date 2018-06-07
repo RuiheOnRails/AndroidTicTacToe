@@ -41,11 +41,14 @@ class OnlineSetting : AppCompatActivity() {
         }
 
         createRoomButton.setOnClickListener {
-            if (roomNameText.text.isEmpty()) {
-                Toast.makeText(this, "must provide room name", Toast.LENGTH_SHORT).show()
+            val re = Regex("[^A-Za-z0-9 ]")
+            val roomName = re.replace(roomNameText.text.toString(), "")
+            if (roomName.isEmpty()) {
+                Toast.makeText(this, "must provide valid room name", Toast.LENGTH_SHORT).show()
             } else {
                 val ref = FirebaseDatabase.getInstance().reference
-                val roomObj = ref.child("rooms").child(roomNameText.text.toString())
+                val roomObj = ref.child("rooms").child(roomName)
+
 
                 roomObj.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
@@ -58,21 +61,21 @@ class OnlineSetting : AppCompatActivity() {
                             Toast.makeText(thisContext, "name taken, try another one", Toast.LENGTH_SHORT).show()
                         } else {
                             val room = Room(true, chosen+3, FirebaseAuth.getInstance().currentUser!!.uid)
-                            db.child("rooms").child(roomNameText.text.toString()).setValue(room)
+                            db.child("rooms").child(roomName).setValue(room)
                             if (chosen == 0) {
-                                db.child("rooms").child(roomNameText.text.toString()).child("0").setValue(arrayListOf(0,0,0))
-                                db.child("rooms").child(roomNameText.text.toString()).child("1").setValue(arrayListOf(0,0,0))
-                                db.child("rooms").child(roomNameText.text.toString()).child("2").setValue(arrayListOf(0,0,0))
+                                db.child("rooms").child(roomName).child("0").setValue(arrayListOf(0,0,0))
+                                db.child("rooms").child(roomName).child("1").setValue(arrayListOf(0,0,0))
+                                db.child("rooms").child(roomName).child("2").setValue(arrayListOf(0,0,0))
                             }
                             if (chosen == 1) {
-                                db.child("rooms").child(roomNameText.text.toString()).child("0").setValue(arrayListOf(0,0,0,0))
-                                db.child("rooms").child(roomNameText.text.toString()).child("1").setValue(arrayListOf(0,0,0,0))
-                                db.child("rooms").child(roomNameText.text.toString()).child("2").setValue(arrayListOf(0,0,0,0))
-                                db.child("rooms").child(roomNameText.text.toString()).child("3").setValue(arrayListOf(0,0,0,0))
+                                db.child("rooms").child(roomName).child("0").setValue(arrayListOf(0,0,0,0))
+                                db.child("rooms").child(roomName).child("1").setValue(arrayListOf(0,0,0,0))
+                                db.child("rooms").child(roomName).child("2").setValue(arrayListOf(0,0,0,0))
+                                db.child("rooms").child(roomName).child("3").setValue(arrayListOf(0,0,0,0))
                             }
 
                             val intent = Intent(thisContext, HostWaiting::class.java)
-                            intent.putExtra("roomName", roomNameText.text.toString())
+                            intent.putExtra("roomName", roomName)
                             intent.putExtra("boardSize", chosen+3)
                             startActivity(intent)
                         }

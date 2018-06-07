@@ -42,8 +42,9 @@ class SignUp : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(signUpEmail.text.toString(), password.text.toString()).addOnCompleteListener { task ->
                     if (task.isSuccessful){
                         val user = auth.currentUser
+                        val re = Regex("[^A-Za-z0-9 ]")
                         val profileUpdates = UserProfileChangeRequest.Builder()
-                                .setDisplayName(displayName.text.toString()).build()
+                                .setDisplayName(re.replace(displayName.text.toString(), "")).build()
                         user!!.updateProfile(profileUpdates)
 
                         db.child("users").child(user.uid).child("gamesPlayed").setValue(0)
