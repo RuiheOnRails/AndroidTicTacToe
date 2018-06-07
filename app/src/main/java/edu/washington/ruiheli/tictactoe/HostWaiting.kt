@@ -41,6 +41,7 @@ class HostWaiting : AppCompatActivity() {
                     } else {
                         val intent = Intent(thiscontext, OnlineGameBoard4x4::class.java)
                         intent.putExtra("roomName", roomName)
+                        intent.putExtra("host", FirebaseAuth.getInstance().currentUser!!.displayName)
                         room.removeEventListener(this)
                         startActivity(intent)
                     }

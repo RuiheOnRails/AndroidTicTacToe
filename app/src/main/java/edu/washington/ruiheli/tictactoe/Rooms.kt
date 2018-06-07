@@ -2,6 +2,7 @@ package edu.washington.ruiheli.tictactoe
 
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -41,9 +42,14 @@ class Rooms : AppCompatActivity() {
                     val arrOfOpen = BooleanArray(p0.childrenCount.toInt())
                     val arrOfRoomKey = arrayOfNulls<String>(p0.childrenCount.toInt())
                     var idx = 0
+                    val allHost = arrayOfNulls<String>(p0.childrenCount.toInt())
                     p0.children.forEach {
                         val tempOpen =  it.child("open").getValue(Boolean::class.java)
 
+                        val host = it.child("player1Name").getValue(String::class.java)
+                        if (host != null) {
+                            allHost[idx] = host
+                        }
                         val tempSize = it.child("boardSize").getValue(Int::class.java)
                         if (tempSize != null) {
                             arrOfSizes[idx] = tempSize
@@ -58,7 +64,7 @@ class Rooms : AppCompatActivity() {
                         }
                         idx++
                     }
-                    rooms.adapter = CustomAdaptor(thisContext, arrOfNames, arrOfSizes, arrOfOpen, arrOfRoomKey)
+                    rooms.adapter = CustomAdaptor(thisContext, arrOfNames, arrOfSizes, arrOfOpen, arrOfRoomKey, allHost)
                 } else {
                     rooms.adapter = null
                 }
@@ -86,12 +92,14 @@ class Rooms : AppCompatActivity() {
         }
     }
 
-    private class CustomAdaptor(context: Context, data: Array<String?>, sizes: IntArray, opens: BooleanArray, keys: Array<String?>): BaseAdapter() {
+    private class CustomAdaptor(context: Context, data: Array<String?>, sizes: IntArray, opens: BooleanArray,
+                                keys: Array<String?>, host: Array<String?>): BaseAdapter() {
         private val data = data
         private val opens = opens
         private val sizes = sizes
         private val keys = keys
         private val myContext =context
+        private val host = host
 
         override fun getCount(): Int {
             return data.size
@@ -111,7 +119,8 @@ class Rooms : AppCompatActivity() {
             val room = rowLayout.findViewById<TextView>(R.id.roomName)
             val roomSize = rowLayout.findViewById<TextView>(R.id.roomSize)
             val roomStatus = rowLayout.findViewById<TextView>(R.id.roomStatus)
-            val host = rowLayout.findViewById<TextView>(R.id.roomHost)
+            val curhost = rowLayout.findViewById<TextView>(R.id.roomHost)
+            curhost.text= host[position]
 
             room.text = keys[position].toString()
             roomSize.text = sizes[position].toString() + " X  " + sizes[position].toString()
