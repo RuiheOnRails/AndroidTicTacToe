@@ -1,17 +1,16 @@
 package edu.washington.ruiheli.tictactoe
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import android.view.Menu
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -59,7 +58,7 @@ class Rooms : AppCompatActivity() {
                         }
                         idx++
                     }
-                    rooms.adapter = CustomAdaptor(arrOfNames, arrOfSizes, arrOfOpen, arrOfRoomKey)
+                    rooms.adapter = CustomAdaptor(thisContext, arrOfNames, arrOfSizes, arrOfOpen, arrOfRoomKey)
                 } else {
                     rooms.adapter = null
                 }
@@ -87,12 +86,12 @@ class Rooms : AppCompatActivity() {
         }
     }
 
-    private class CustomAdaptor(data: Array<String?>, sizes: IntArray, opens: BooleanArray, keys: Array<String?>): BaseAdapter() {
+    private class CustomAdaptor(context: Context, data: Array<String?>, sizes: IntArray, opens: BooleanArray, keys: Array<String?>): BaseAdapter() {
         private val data = data
         private val opens = opens
         private val sizes = sizes
         private val keys = keys
-
+        private val myContext =context
 
         override fun getCount(): Int {
             return data.size
@@ -107,10 +106,25 @@ class Rooms : AppCompatActivity() {
         }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-            val row = TextView(parent?.context)
-            row.text = data[position]
-            row.textSize = 30f
-            row.setOnClickListener {
+            val rowLayoutInflater = LayoutInflater.from(myContext)
+            val rowLayout = rowLayoutInflater.inflate(R.layout.row_layout, parent, false)
+            val room = rowLayout.findViewById<TextView>(R.id.roomName)
+            val roomSize = rowLayout.findViewById<TextView>(R.id.roomSize)
+            val roomStatus = rowLayout.findViewById<TextView>(R.id.roomStatus)
+            val host = rowLayout.findViewById<TextView>(R.id.roomHost)
+
+            room.text = keys[position].toString()
+            roomSize.text = sizes[position].toString() + " X  " + sizes[position].toString()
+            if(opens[position]) {
+                roomStatus.text = "OPEN"
+            } else {
+                roomStatus.text = "CLOSE"
+            }
+            //val row = TextView(parent?.context)
+            //row.text = data[position]
+            Log.i("Rooms", data[position])
+            // row.textSize = 30f
+            rowLayout.setOnClickListener {
                 if (!opens[position]) {
                     Toast.makeText(parent?.context, "room is not open", Toast.LENGTH_SHORT).show()
                 } else {
@@ -134,7 +148,7 @@ class Rooms : AppCompatActivity() {
                 }
 
             }
-            return row
+            return rowLayout
         }
 
     }
