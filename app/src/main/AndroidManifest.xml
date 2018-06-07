@@ -46,7 +46,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainMenu" />
         </activity>
-        <activity android:name=".HostWaiting" />
+        <activity
+            android:name=".HostWaiting"
+            android:parentActivityName=".Rooms">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Rooms" />
+        </activity>
         <activity
             android:name=".Stats"
             android:parentActivityName=".MainMenu">
