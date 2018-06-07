@@ -22,25 +22,25 @@
         android:id="@+id/roomSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="@color/tictackBG"
         android:textSize="17.5dp"
-        app:layout_constraintStart_toEndOf="@+id/roomName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/roomStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:paddingBottom="8dp"
         android:text="TextView"
         android:textColor="@color/tictackBG"
         android:textSize="17.5dp"
-        app:layout_constraintStart_toEndOf="@+id/roomName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roomSize" />
 
     <TextView
@@ -48,10 +48,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text=""
+        android:layout_marginTop="23dp"
+        android:text="HostName"
         android:textColor="@color/tictackBG"
         android:textSize="17.5dp"
-        app:layout_constraintStart_toEndOf="@+id/roomSize"
+        app:layout_constraintStart_toEndOf="@+id/roomName"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

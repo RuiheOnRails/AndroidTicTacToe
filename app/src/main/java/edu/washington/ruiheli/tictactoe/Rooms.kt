@@ -113,7 +113,7 @@ class Rooms : AppCompatActivity() {
             val roomStatus = rowLayout.findViewById<TextView>(R.id.roomStatus)
             val host = rowLayout.findViewById<TextView>(R.id.roomHost)
 
-            room.text = "RM: " + keys[position].toString()
+            room.text = keys[position].toString()
             roomSize.text = sizes[position].toString() + " X  " + sizes[position].toString()
             if(opens[position]) {
                 roomStatus.text = "OPEN"
